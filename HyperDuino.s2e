@@ -1,0 +1,135 @@
+{	"extensionName": "HyperDuino",
+	"description": "A Block Based Programming Environment for The HyperDuino",
+	"version": "1.0",
+	"author": "Roger Wagner(hyperduino@1010technologies.com)",
+	"homepage": "http://hyperduino.com/index.html",
+	"sort":0,
+	"javascriptURL":"js/HyperDuino.js",
+  "firmware":"1.0",
+  "extensionPort":0,
+	"blockSpecs": [
+		["h","HyperDuino","runArduino"],
+
+		["B", "HyperDuino %n Is Touched",
+		"getDigital",
+		"9",
+		{
+			"setup":"MPR121.begin(mpr121Addr);\n",			
+			"inc":"#include \"MPR121_hd.h\"",
+			"def":"#define mpr121Addr 0x5a\n#define numElectrodes 12\nint val = 0;\n",
+			"work":"(val == 1)",
+			"loop":"if (MPR121.touchStatusChanged()) {\nMPR121.updateTouchData();\nif (MPR121.isNewTouch(({0}-13)/-1)) {\nval = 1;\n} else if (MPR121.isNewRelease(({0}-13)/-1)){\nval = 0;\n}\n}\n"
+		}
+		],
+
+		["w",
+		"Move Foward At Speed: %n",
+		"runDigital",
+		"255",
+		{
+			"setup":"pinMode(4,OUTPUT);\npinMode(5,OUTPUT);\npinMode(7,OUTPUT);\npinMode(8,OUTPUT);\npinMode(6,OUTPUT);",
+			"inc":"",
+			"def":"",
+			"work":"digitalWrite(6,HIGH);\nanalogWrite(3,{0});\nanalogWrite(9,{0});\ndigitalWrite(4,HIGH);\ndigitalWrite(7,HIGH);\ndigitalWrite(5,LOW);\ndigitalWrite(8,LOW);\n",
+			"loop":""
+		}
+		],
+
+		["w",
+		"Move Backward At Speed: %n",
+		"digitalWrite",
+		"255",
+		{
+			"setup":"pinMode(4,OUTPUT);\npinMode(5,OUTPUT);\npinMode(7,OUTPUT);\npinMode(8,OUTPUT);\npinMode(6,OUTPUT);",
+			"inc":"",
+			"def":"",
+			"work":"digitalWrite(6,HIGH);\nanalogWrite(3,{0});\nanalogWrite(9,{0});\ndigitalWrite(4,LOW);\ndigitalWrite(7,LOW);\ndigitalWrite(5,HIGH);\ndigitalWrite(8,HIGH);\n",
+			"loop":""
+		}
+		],
+		["w",
+		"Left Turn At Speed: %n",
+		"runDigital3",
+		"255",
+		{
+			"setup":"pinMode(4,OUTPUT);\npinMode(5,OUTPUT);\npinMode(7,OUTPUT);\npinMode(8,OUTPUT);\npinMode(6,OUTPUT);",
+			"inc":"",
+			"def":"",
+			"work":"digitalWrite(6,HIGH);\nanalogWrite(3,{0});\nanalogWrite(9,{0});\ndigitalWrite(4,LOW);\ndigitalWrite(7,HIGH);\ndigitalWrite(5,HIGH);\ndigitalWrite(8,LOW);\n",
+			"loop":""
+		}
+		],
+		["w",
+		"Right Turn At Speed: %n",
+		"runDigital4",
+		"255",
+		{
+			"setup":"pinMode(4,OUTPUT);\npinMode(5,OUTPUT);\npinMode(7,OUTPUT);\npinMode(8,OUTPUT);\npinMode(6,OUTPUT);",
+			"inc":"",
+			"def":"",
+			"work":"digitalWrite(6,HIGH);\nanalogWrite(3,{0});\nanalogWrite(9,{0});\ndigitalWrite(4,HIGH);\ndigitalWrite(7,LOW);\ndigitalWrite(5,LOW);\ndigitalWrite(8,HIGH);\n",
+			"loop":""
+		}
+		],
+		["w",
+		"Stop",
+		"runDigital2",
+		{
+			"setup":"pinMode(4,OUTPUT);\npinMode(5,OUTPUT);\npinMode(7,OUTPUT);\npinMode(8,OUTPUT);\npinMode(6,OUTPUT);",
+			"inc":"",
+			"def":"",
+			"work":"digitalWrite(6,LOW);\nanalogWrite(3,0);\nanalogWrite(9,0);\ndigitalWrite(4,LOW);\ndigitalWrite(7,LOW);\ndigitalWrite(5,LOW);\ndigitalWrite(8,LOW);\n",
+			"loop":""
+		}
+		],
+		["w",
+		"Play Track %n",
+		"runPackage",
+		"1",
+		{
+			"setup":"delay(500);\ns.sendCommand(CMD_SEL_DEV, DEV_TF);\ndelay(200);\n",
+			"inc":"#include \"send.h\"",
+			"def":"Send s;\n#define CMD_SEL_DEV 0X09\n#define DEV_TF 0X02\n#define CMD_PLAY_W_VOL 0X22\n#define CMD_PLAY 0X0D\n#define CMD_PAUSE 0X0E\n#define CMD_PREVIOUS 0X02\n#define CMD_NEXT 0X01\n",
+			"work":"s.sendCommand(CMD_PLAY_W_VOL, 0X1E0{0});",
+			"loop":""
+		}
+		],
+		["w",
+		"Pause Track",
+		"runPackage2",
+		{
+			"setup":"delay(500);\ns.sendCommand(CMD_SEL_DEV, DEV_TF);\ndelay(200);\n",
+			"inc":"#include \"send.h\"",
+			"def":"Send s;\n#define CMD_SEL_DEV 0X09\n#define DEV_TF 0X02\n#define CMD_PLAY_W_VOL 0X22\n#define CMD_PLAY 0X0D\n#define CMD_PAUSE 0X0E\n#define CMD_PREVIOUS 0X02\n#define CMD_NEXT 0X01\n",
+			"work":"s.sendCommand(CMD_PAUSE, 0X0E);\n",
+			"loop":"" 
+		}
+		],
+		["B",
+		"HyperDuino MP3 Is Playing",
+		"runPackage3",
+		{
+			"setup":"delay(500);\ns.sendCommand(CMD_SEL_DEV, DEV_TF);\ndelay(200);\n",
+			"inc":"#include \"send.h\"",
+			"def":"Send s;\n#define CMD_SEL_DEV 0X09\n#define DEV_TF 0X02\n#define CMD_PLAY_W_VOL 0X22\n#define CMD_PLAY 0X0D\n#define CMD_PAUSE 0X0E\n#define CMD_PREVIOUS 0X02\n#define CMD_NEXT 0X01\n#define CMD_QUERY_STATUS 0x42\n",
+			"work":"s.decodeMP3Answer() == 1\n",
+			"loop":"s.sendCommand(CMD_QUERY_STATUS, 0);\n"
+		}
+		]
+
+	],
+	"menus": {
+		"digital":["HIGH","LOW"],
+	},
+	"values":{
+		"HIGH":1,
+		"LOW":0
+	},
+	"translators":{
+		"zh_CN":{
+			"HIGH":"高电平",
+			"LOW":"低电平",
+			"digitalWrite( %n , %d.digital )":"数字口输出( %n ,%d.digital )",
+		}
+	}
+}
