@@ -1,4 +1,4 @@
-{	"extensionName": "HyperDuino v3.5",
+{	"extensionName": "HyperDuino v3.5R",
 	"description": "A Block Based Programming Environment for The HyperDuino v3.5R",
 	"version": "1.3.5.1",
 	"author": "Roger Wagner(hyperduino@1010technologies.com)",
@@ -8,7 +8,7 @@
   "firmware":"1.0",
   "extensionPort":0,
 	"blockSpecs": [
-		["h","HyperDuino v3.5","runArduino"],
+		["h","HyperDuino v3.5R","runArduino"],
 
 		["B", "HyperDuino %n Is Touched",
 		"getDigital",
