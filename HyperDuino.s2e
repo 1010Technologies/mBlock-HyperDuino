@@ -8,7 +8,7 @@
   "firmware":"1.0",
   "extensionPort":0,
 	"blockSpecs": [
-		["h","HyperDuino","runArduino"],
+		["h","HyperDuino v3.5","runArduino"],
 
 		["B", "HyperDuino %n Is Touched",
 		"getDigital",
@@ -30,7 +30,7 @@
 			"setup":"pinMode(11,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
 			"inc":"",
 			"def":"",
-			"work":"\nanalogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,HIGH);\ndigitalWrite(8,HIGH);\ndigitalWrite(13,LOW);\ndigitalWrite(9,LOW);\n",
+			"work":"analogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,HIGH);\ndigitalWrite(8,HIGH);\ndigitalWrite(13,LOW);\ndigitalWrite(9,LOW);\n",
 			"loop":""
 		}
 		],
@@ -43,7 +43,7 @@
 			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
 			"inc":"",
 			"def":"",
-			"work":"\nanalogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,LOW);\ndigitalWrite(8,LOW);\ndigitalWrite(13,HIGH);\ndigitalWrite(9,HIGH);\n",
+			"work":"analogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,LOW);\ndigitalWrite(8,LOW);\ndigitalWrite(13,HIGH);\ndigitalWrite(9,HIGH);\n",
 			"loop":""
 		}
 		],
@@ -55,7 +55,7 @@
 			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
 			"inc":"",
 			"def":"",
-			"work":"\nanalogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,LOW);\ndigitalWrite(8,HIGH);\ndigitalWrite(13,HIGH);\ndigitalWrite(9,LOW);\n",
+			"work":"analogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,LOW);\ndigitalWrite(8,HIGH);\ndigitalWrite(13,HIGH);\ndigitalWrite(9,LOW);\n",
 			"loop":""
 		}
 		],
@@ -67,7 +67,7 @@
 			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
 			"inc":"",
 			"def":"",
-			"work":"\nanalogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,HIGH);\ndigitalWrite(8,LOW);\ndigitalWrite(13,LOW);\ndigitalWrite(9,HIGH);\n",
+			"work":"analogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,HIGH);\ndigitalWrite(8,LOW);\ndigitalWrite(13,LOW);\ndigitalWrite(9,HIGH);\n",
 			"loop":""
 		}
 		],
@@ -78,7 +78,7 @@
 			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
 			"inc":"",
 			"def":"",
-			"work":"\nanalogWrite(11,0);\nanalogWrite(10,0);\ndigitalWrite(12,LOW);\ndigitalWrite(8,LOW);\ndigitalWrite(13,LOW);\ndigitalWrite(9,LOW);\n",
+			"work":"analogWrite(11,0);\nanalogWrite(10,0);\ndigitalWrite(12,LOW);\ndigitalWrite(8,LOW);\ndigitalWrite(13,LOW);\ndigitalWrite(9,LOW);\n",
 			"loop":""
 		}
 		],
