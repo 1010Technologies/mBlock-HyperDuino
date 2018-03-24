@@ -278,5 +278,5 @@
     }
 
     var descriptor = {};
-    ScratchExtensions.register('HyperDuino', descriptor, ext, {type: 'serial'});
+    ScratchExtensions.register('HyperDuino v3.5R', descriptor, ext, {type: 'serial'});
 })({});
