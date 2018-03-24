@@ -1,6 +1,6 @@
 {	"extensionName": "HyperDuino",
 	"description": "A Block Based Programming Environment for The HyperDuino",
-	"version": "1.0",
+	"version": "1.3.5.1",
 	"author": "Roger Wagner(hyperduino@1010technologies.com)",
 	"homepage": "http://hyperduino.com/index.html",
 	"sort":0,
@@ -27,10 +27,10 @@
 		"runDigital",
 		"255",
 		{
-			"setup":"pinMode(4,OUTPUT);\npinMode(5,OUTPUT);\npinMode(7,OUTPUT);\npinMode(8,OUTPUT);\npinMode(6,OUTPUT);",
+			"setup":"pinMode(11,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
 			"inc":"",
 			"def":"",
-			"work":"digitalWrite(6,HIGH);\nanalogWrite(3,{0});\nanalogWrite(9,{0});\ndigitalWrite(4,HIGH);\ndigitalWrite(7,HIGH);\ndigitalWrite(5,LOW);\ndigitalWrite(8,LOW);\n",
+			"work":"\nanalogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,HIGH);\ndigitalWrite(8,HIGH);\ndigitalWrite(13,LOW);\ndigitalWrite(9,LOW);\n",
 			"loop":""
 		}
 		],
@@ -40,34 +40,34 @@
 		"digitalWrite",
 		"255",
 		{
-			"setup":"pinMode(4,OUTPUT);\npinMode(5,OUTPUT);\npinMode(7,OUTPUT);\npinMode(8,OUTPUT);\npinMode(6,OUTPUT);",
+			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
 			"inc":"",
 			"def":"",
-			"work":"digitalWrite(6,HIGH);\nanalogWrite(3,{0});\nanalogWrite(9,{0});\ndigitalWrite(4,LOW);\ndigitalWrite(7,LOW);\ndigitalWrite(5,HIGH);\ndigitalWrite(8,HIGH);\n",
+			"work":"\nanalogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,LOW);\ndigitalWrite(8,LOW);\ndigitalWrite(13,HIGH);\ndigitalWrite(9,HIGH);\n",
 			"loop":""
 		}
 		],
 		["w",
-		"Left Turn At Speed: %n",
+		"Turn Left At Speed: %n",
 		"runDigital3",
 		"255",
 		{
-			"setup":"pinMode(4,OUTPUT);\npinMode(5,OUTPUT);\npinMode(7,OUTPUT);\npinMode(8,OUTPUT);\npinMode(6,OUTPUT);",
+			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
 			"inc":"",
 			"def":"",
-			"work":"digitalWrite(6,HIGH);\nanalogWrite(3,{0});\nanalogWrite(9,{0});\ndigitalWrite(4,LOW);\ndigitalWrite(7,HIGH);\ndigitalWrite(5,HIGH);\ndigitalWrite(8,LOW);\n",
+			"work":"\nanalogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,LOW);\ndigitalWrite(8,HIGH);\ndigitalWrite(13,HIGH);\ndigitalWrite(9,LOW);\n",
 			"loop":""
 		}
 		],
 		["w",
-		"Right Turn At Speed: %n",
+		"Turn Right At Speed: %n",
 		"runDigital4",
 		"255",
 		{
-			"setup":"pinMode(4,OUTPUT);\npinMode(5,OUTPUT);\npinMode(7,OUTPUT);\npinMode(8,OUTPUT);\npinMode(6,OUTPUT);",
+			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
 			"inc":"",
 			"def":"",
-			"work":"digitalWrite(6,HIGH);\nanalogWrite(3,{0});\nanalogWrite(9,{0});\ndigitalWrite(4,HIGH);\ndigitalWrite(7,LOW);\ndigitalWrite(5,LOW);\ndigitalWrite(8,HIGH);\n",
+			"work":"\nanalogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,HIGH);\ndigitalWrite(8,LOW);\ndigitalWrite(13,LOW);\ndigitalWrite(9,HIGH);\n",
 			"loop":""
 		}
 		],
@@ -75,10 +75,10 @@
 		"Stop",
 		"runDigital2",
 		{
-			"setup":"pinMode(4,OUTPUT);\npinMode(5,OUTPUT);\npinMode(7,OUTPUT);\npinMode(8,OUTPUT);\npinMode(6,OUTPUT);",
+			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
 			"inc":"",
 			"def":"",
-			"work":"digitalWrite(6,LOW);\nanalogWrite(3,0);\nanalogWrite(9,0);\ndigitalWrite(4,LOW);\ndigitalWrite(7,LOW);\ndigitalWrite(5,LOW);\ndigitalWrite(8,LOW);\n",
+			"work":"\nanalogWrite(11,0);\nanalogWrite(10,0);\ndigitalWrite(12,LOW);\ndigitalWrite(8,LOW);\ndigitalWrite(13,LOW);\ndigitalWrite(9,LOW);\n",
 			"loop":""
 		}
 		],
