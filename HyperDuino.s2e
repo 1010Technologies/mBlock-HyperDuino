@@ -23,7 +23,7 @@
 		],
 
 		["w",
-		"Move Foward At Speed: %n",
+		"Move Forward At Speed: %n",
 		"runDigital",
 		"255",
 		{
