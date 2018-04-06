@@ -56,19 +56,22 @@
         device.send([pin, levels[level]])
     };
     
-    ext.runArduino = function(){
+    ext.runHyperDuino = function(){
         responseValue();
     };
-    ext.runDigital = function(pin,level) {
+    ext.runMotor = function(pin,level) {
         runPackage(30,pin,typeof level=="string"?levels[level]:new Number(level));
     };
-    ext.runDigital2 = function(pin,level) {
+    ext.runMotor2 = function(pin,level) {
         runPackage(30,pin,typeof level=="string"?levels[level]:new Number(level));
     };
-    ext.runDigital3 = function(pin,level) {
+    ext.runMotor3 = function(pin,level) {
         runPackage(30,pin,typeof level=="string"?levels[level]:new Number(level));
     };
-    ext.runDigital4 = function(pin,level) {
+    ext.runMotor4 = function(pin,level) {
+        runPackage(30,pin,typeof level=="string"?levels[level]:new Number(level));
+    };
+    ext.runMotor5 = function(pin,level) {
         runPackage(30,pin,typeof level=="string"?levels[level]:new Number(level));
     };
     ext.runPwm = function(pin,pwm) {
@@ -84,7 +87,7 @@
         startTimer = new Date().getTime();
         responseValue();
     };
-    ext.getDigital = function(nextID,pin){
+    ext.getTouch = function(nextID,pin){
         var deviceId = 30;
         getPackage(nextID,deviceId,pin);
     };
@@ -121,13 +124,13 @@
         device.send(bytes);
     }
     
-    function runPackage(){
+    function runTrack(){
         sendPackage(arguments, 2);
     }
-    function runPackage2(){
+    function runTrack2 (){
         sendPackage(arguments, 2);
     }
-    function runPackage3(){
+    function runTrack3(){
         sendPackage(arguments, 2);
     }
     function getPackage(){
@@ -278,5 +281,5 @@
     }
 
     var descriptor = {};
-    ScratchExtensions.register('HyperDuino v3.5R', descriptor, ext, {type: 'serial'});
+    ScratchExtensions.register('HyperDuino v2.4R', descriptor, ext, {type: 'serial'});
 })({});
