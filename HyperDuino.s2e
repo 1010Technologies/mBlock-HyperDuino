@@ -8,10 +8,10 @@
   "firmware":"1.0",
   "extensionPort":0,
 	"blockSpecs": [
-		["h","HyperDuino v3.5R","runArduino"],
+		["h","HyperDuino v3.5R","runHyperDuino"],
 
 		["B", "HyperDuino %n Is Touched",
-		"getDigital",
+		"getTouch",
 		"9",
 		{
 			"setup":"MPR121.begin(mpr121Addr);\n",			
@@ -24,7 +24,7 @@
 
 		["w",
 		"Move Forward At Speed: %n",
-		"runDigital",
+		"runMotor",
 		"255",
 		{
 			"setup":"pinMode(11,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
@@ -37,7 +37,7 @@
 
 		["w",
 		"Move Backward At Speed: %n",
-		"digitalWrite",
+		"runMotor2",
 		"255",
 		{
 			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
@@ -49,7 +49,7 @@
 		],
 		["w",
 		"Turn Left At Speed: %n",
-		"runDigital3",
+		"runMotor3",
 		"255",
 		{
 			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
@@ -61,7 +61,7 @@
 		],
 		["w",
 		"Turn Right At Speed: %n",
-		"runDigital4",
+		"runMotor4",
 		"255",
 		{
 			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
@@ -73,7 +73,7 @@
 		],
 		["w",
 		"Stop",
-		"runDigital2",
+		"runMotor5",
 		{
 			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
 			"inc":"",
@@ -84,7 +84,7 @@
 		],
 		["w",
 		"Play Track %n",
-		"runPackage",
+		"runTrack",
 		"1",
 		{
 			"setup":"delay(500);\ns.sendCommand(CMD_SEL_DEV, DEV_TF);\ndelay(200);\n",
@@ -96,7 +96,7 @@
 		],
 		["w",
 		"Pause Track",
-		"runPackage2",
+		"runTrack2",
 		{
 			"setup":"delay(500);\ns.sendCommand(CMD_SEL_DEV, DEV_TF);\ndelay(200);\n",
 			"inc":"#include \"send.h\"",
@@ -107,7 +107,7 @@
 		],
 		["B",
 		"HyperDuino MP3 Is Playing",
-		"runPackage3",
+		"runTrack3",
 		{
 			"setup":"delay(500);\ns.sendCommand(CMD_SEL_DEV, DEV_TF);\ndelay(200);\n",
 			"inc":"#include \"send.h\"",
