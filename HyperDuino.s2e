@@ -8,7 +8,7 @@
   "firmware":"1.0",
   "extensionPort":0,
 	"blockSpecs": [
-		["h","HyperDuino v3.5R","runHyperDuino"],
+		["h","HyperDuino v3.5R","runArduino"],
 
 		["B", "HyperDuino %n Is Touched",
 		"getTouch",
