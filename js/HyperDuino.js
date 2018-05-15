@@ -56,7 +56,7 @@
         device.send([pin, levels[level]])
     };
     
-    ext.runHyperDuino = function(){
+    ext.runArduino = function(){
         responseValue();
     };
     ext.runMotor = function(pin,level) {
