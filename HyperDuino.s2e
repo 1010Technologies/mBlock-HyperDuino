@@ -15,7 +15,7 @@
 		"9",
 		{
 			"setup":"MPR121.begin(mpr121Addr);\n",			
-			"inc":"#include \"MPR121_hd.h\"",
+			"inc":"#include \"MPR121_hd.h\"\n",
 			"def":"#define mpr121Addr 0x5a\n#define numElectrodes 12\nint val = 0;\n",
 			"work":"(val == 1)",
 			"loop":"if (MPR121.touchStatusChanged()) {\nMPR121.updateTouchData();\nif (MPR121.isNewTouch(({0}-13)/-1)) {\nval = 1;\n} else if (MPR121.isNewRelease(({0}-13)/-1)){\nval = 0;\n}\n}\n"
@@ -88,7 +88,7 @@
 		"1",
 		{
 			"setup":"delay(500);\ns.sendCommand(CMD_SEL_DEV, DEV_TF);\ndelay(200);\n",
-			"inc":"#include \"send.h\"",
+			"inc":"#include \"send.h\"\n",
 			"def":"Send s;\n#define CMD_SEL_DEV 0X09\n#define DEV_TF 0X02\n#define CMD_PLAY_W_VOL 0X22\n#define CMD_PLAY 0X0D\n#define CMD_PAUSE 0X0E\n#define CMD_PREVIOUS 0X02\n#define CMD_NEXT 0X01\n",
 			"work":"s.sendCommand(CMD_PLAY_W_VOL, 0X1E0{0});",
 			"loop":""
@@ -99,7 +99,7 @@
 		"runTrack2",
 		{
 			"setup":"delay(500);\ns.sendCommand(CMD_SEL_DEV, DEV_TF);\ndelay(200);\n",
-			"inc":"#include \"send.h\"",
+			"inc":"#include \"send.h\"\n",
 			"def":"Send s;\n#define CMD_SEL_DEV 0X09\n#define DEV_TF 0X02\n#define CMD_PLAY_W_VOL 0X22\n#define CMD_PLAY 0X0D\n#define CMD_PAUSE 0X0E\n#define CMD_PREVIOUS 0X02\n#define CMD_NEXT 0X01\n",
 			"work":"s.sendCommand(CMD_PAUSE, 0X0E);\n",
 			"loop":"" 
@@ -110,7 +110,7 @@
 		"runTrack3",
 		{
 			"setup":"delay(500);\ns.sendCommand(CMD_SEL_DEV, DEV_TF);\ndelay(200);\n",
-			"inc":"#include \"send.h\"",
+			"inc":"#include \"send.h\"\n",
 			"def":"Send s;\n#define CMD_SEL_DEV 0X09\n#define DEV_TF 0X02\n#define CMD_PLAY_W_VOL 0X22\n#define CMD_PLAY 0X0D\n#define CMD_PAUSE 0X0E\n#define CMD_PREVIOUS 0X02\n#define CMD_NEXT 0X01\n#define CMD_QUERY_STATUS 0x42\n",
 			"work":"s.decodeMP3Answer() == 1\n",
 			"loop":"s.sendCommand(CMD_QUERY_STATUS, 0);\n"
