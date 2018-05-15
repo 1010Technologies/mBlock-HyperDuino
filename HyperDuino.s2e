@@ -8,7 +8,7 @@
   "firmware":"1.0",
   "extensionPort":0,
 	"blockSpecs": [
-		["h","HyperDuino v3.5R","runHyperDuino"],
+		["h","HyperDuino v3.5R","runArduino"],
 
 		["B", "HyperDuino %n Is Touched",
 		"getTouch",
@@ -27,7 +27,7 @@
 		"runMotor",
 		"255",
 		{
-			"setup":"pinMode(11,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
+			"setup":"pinMode(11,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);\n",
 			"inc":"",
 			"def":"",
 			"work":"analogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,HIGH);\ndigitalWrite(8,HIGH);\ndigitalWrite(13,LOW);\ndigitalWrite(9,LOW);\n",
@@ -40,7 +40,7 @@
 		"runMotor2",
 		"255",
 		{
-			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
+			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);\n",
 			"inc":"",
 			"def":"",
 			"work":"analogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,LOW);\ndigitalWrite(8,LOW);\ndigitalWrite(13,HIGH);\ndigitalWrite(9,HIGH);\n",
@@ -52,7 +52,7 @@
 		"runMotor3",
 		"255",
 		{
-			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
+			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);\n",
 			"inc":"",
 			"def":"",
 			"work":"analogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,LOW);\ndigitalWrite(8,HIGH);\ndigitalWrite(13,HIGH);\ndigitalWrite(9,LOW);\n",
@@ -64,7 +64,7 @@
 		"runMotor4",
 		"255",
 		{
-			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
+			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);\n",
 			"inc":"",
 			"def":"",
 			"work":"analogWrite(11,{0});\nanalogWrite(10,{0});\ndigitalWrite(12,HIGH);\ndigitalWrite(8,LOW);\ndigitalWrite(13,LOW);\ndigitalWrite(9,HIGH);\n",
@@ -75,7 +75,7 @@
 		"Stop",
 		"runMotor5",
 		{
-			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);",
+			"setup":"pinMode(12,OUTPUT);\npinMode(13,OUTPUT);\npinMode(8,OUTPUT);\npinMode(9,OUTPUT);\n",
 			"inc":"",
 			"def":"",
 			"work":"analogWrite(11,0);\nanalogWrite(10,0);\ndigitalWrite(12,LOW);\ndigitalWrite(8,LOW);\ndigitalWrite(13,LOW);\ndigitalWrite(9,LOW);\n",
@@ -90,7 +90,7 @@
 			"setup":"delay(500);\ns.sendCommand(CMD_SEL_DEV, DEV_TF);\ndelay(200);\n",
 			"inc":"#include \"send.h\"\n",
 			"def":"Send s;\n#define CMD_SEL_DEV 0X09\n#define DEV_TF 0X02\n#define CMD_PLAY_W_VOL 0X22\n#define CMD_PLAY 0X0D\n#define CMD_PAUSE 0X0E\n#define CMD_PREVIOUS 0X02\n#define CMD_NEXT 0X01\n",
-			"work":"s.sendCommand(CMD_PLAY_W_VOL, 0X1E0{0});",
+			"work":"s.sendCommand(CMD_PLAY_W_VOL, 0X1E0{0});\n",
 			"loop":""
 		}
 		],
