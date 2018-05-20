@@ -124,13 +124,16 @@
         device.send(bytes);
     }
     
-    function runTrack(){
+    function serialmp3play(){
         sendPackage(arguments, 2);
     }
-    function runTrack2 (){
+    function serialmp3command (){
         sendPackage(arguments, 2);
     }
-    function runTrack3(){
+    function serialmp3volume(){
+        sendPackage(arguments, 2);
+    }
+    function serialmp3isplaying(){
         sendPackage(arguments, 2);
     }
     function getPackage(){
@@ -281,5 +284,5 @@
     }
 
     var descriptor = {};
-    ScratchExtensions.register('HyperDuino v2.4R', descriptor, ext, {type: 'serial'});
+    ScratchExtensions.register('HyperDuino v3.5R', descriptor, ext, {type: 'serial'});
 })({});

@@ -1,8 +1,8 @@
 {	"extensionName": "HyperDuino v3_5R",
-	"description": "A Block Based Programming Environment for The HyperDuino v3.5R",
-	"version": "1.3.5.1",
+	"description": "A Block Based Programming Environment for the HyperDuino v3.5R",
+	"version": "1.3.5.2",
 	"author": "Roger Wagner(hyperduino@1010technologies.com)",
-	"homepage": "http://hyperduino.com/index.html",
+	"homepage": "http://hyperduino.com/",
 	"sort":0,
 	"javascriptURL":"js/HyperDuino.js",
   "firmware":"1.0",
@@ -12,13 +12,13 @@
 
 		["B", "HyperDuino %n Is Touched",
 		"getTouch",
-		"9",
+		"2",
 		{
-			"setup":"MPR121.begin(mpr121Addr);\n",			
-			"inc":"#include \"MPR121_hd.h\"\n",
-			"def":"#define mpr121Addr 0x5a\n#define numElectrodes 12\nint val = 0;\n",
-			"work":"(val == 1)",
-			"loop":"if (MPR121.touchStatusChanged()) {\nMPR121.updateTouchData();\nif (MPR121.isNewTouch(({0}-13)/-1)) {\nval = 1;\n} else if (MPR121.isNewRelease(({0}-13)/-1)){\nval = 0;\n}\n}\n"
+			"inc":"#include \"HyperDuino.h\"\n",
+			"def":"#define CAPSENSE_ADDRESS 0x5A\n#define CAPSENSE_PINS 12\n",
+			"setup":"Capsense.begin(CAPSENSE_ADDRESS, CAPSENSE_PINS);\nfor (int _i=2;_i<=13;_i++) pinMode(_i,OUTPUT);\n",
+			"work":"(isPinTouched({0}))",
+			"loop":""
 		}
 		],
 
@@ -83,47 +83,69 @@
 		}
 		],
 		["w",
-		"Play Track %n",
-		"runTrack",
+		"play MP3 track %n from folder %n",
+		"serialmp3play",
+		"1",
 		"1",
 		{
-			"setup":"delay(500);\ns.sendCommand(CMD_SEL_DEV, DEV_TF);\ndelay(200);\n",
-			"inc":"#include \"send.h\"\n",
-			"def":"Send s;\n#define CMD_SEL_DEV 0X09\n#define DEV_TF 0X02\n#define CMD_PLAY_W_VOL 0X22\n#define CMD_PLAY 0X0D\n#define CMD_PAUSE 0X0E\n#define CMD_PREVIOUS 0X02\n#define CMD_NEXT 0X01\n",
-			"work":"s.sendCommand(CMD_PLAY_W_VOL, 0X1E0{0});\n",
+			"setup":"",
+			"inc":"#include \"SerialMP3Player.h\"\n",
+			"def":"",
+			"work":"if (MP3_IsAvailable()) MP3_sendCommand(CMD_PLAY_FOLDER_FILE, {1}*256 + {0});\n",
 			"loop":""
 		}
 		],
 		["w",
-		"Pause Track",
-		"runTrack2",
+		"send MP3 command %d.mp3command",
+		"serialmp3command",
+		"Play next track",
 		{
-			"setup":"delay(500);\ns.sendCommand(CMD_SEL_DEV, DEV_TF);\ndelay(200);\n",
-			"inc":"#include \"send.h\"\n",
-			"def":"Send s;\n#define CMD_SEL_DEV 0X09\n#define DEV_TF 0X02\n#define CMD_PLAY_W_VOL 0X22\n#define CMD_PLAY 0X0D\n#define CMD_PAUSE 0X0E\n#define CMD_PREVIOUS 0X02\n#define CMD_NEXT 0X01\n",
-			"work":"s.sendCommand(CMD_PAUSE, 0X0E);\n",
+			"setup":"",
+			"inc":"#include \"SerialMP3Player.h\"\n",
+			"def":"",
+			"work":"if (MP3_IsAvailable()) MP3_sendCommand({0}, 0);\n",
+			"loop":"" 
+		}
+		],
+		["w",
+		"set MP3 volume to %n",
+		"serialmp3volume",
+		"30",
+		{
+			"setup":"",
+			"inc":"#include \"SerialMP3Player.h\"\n",
+			"def":"",
+			"work":"if (MP3_IsAvailable()) MP3_sendCommand(CMD_SET_VOLUME, {0});\n",
 			"loop":"" 
 		}
 		],
 		["B",
-		"HyperDuino MP3 Is Playing",
-		"runTrack3",
+		"MP3 Is Playing",
+		"serialmp3isplaying",
 		{
-			"setup":"delay(500);\ns.sendCommand(CMD_SEL_DEV, DEV_TF);\ndelay(200);\n",
-			"inc":"#include \"send.h\"\n",
-			"def":"Send s;\n#define CMD_SEL_DEV 0X09\n#define DEV_TF 0X02\n#define CMD_PLAY_W_VOL 0X22\n#define CMD_PLAY 0X0D\n#define CMD_PAUSE 0X0E\n#define CMD_PREVIOUS 0X02\n#define CMD_NEXT 0X01\n#define CMD_QUERY_STATUS 0x42\n",
-			"work":"s.decodeMP3Answer() == 1\n",
-			"loop":"s.sendCommand(CMD_QUERY_STATUS, 0);\n"
+			"setup":"",
+			"inc":"#include \"SerialMP3Player.h\"\n",
+			"def":"",
+			"work":"(MP3_IsAvailable() && MP3_sendCommand(CMD_QUERY_STATUS, 0) == 1)",
+			"loop":""
 		}
 		]
 
 	],
 	"menus": {
 		"digital":["HIGH","LOW"],
+		"mp3command":["Play next track","Play previous track","Increase volume","Decrease volume","Pause","Resume","Stop"]
 	},
 	"values":{
 		"HIGH":1,
-		"LOW":0
+		"LOW":0,
+		"Play next track": 1,
+		"Play previous track": 2,
+		"Increase volume": 4,
+		"Decrease volume": 5,
+		"Pause": 14,
+		"Resume": 13,
+		"Stop": 22
 	},
 	"translators":{
 		"zh_CN":{
