@@ -130,13 +130,66 @@
 			"work":"(MP3_IsAvailable() && MP3_sendCommand(CMD_QUERY_STATUS, 0) == 1)",
 			"loop":""
 		}
+		],
+		["w",
+			"LCD setup I2C %d.LCDI2C columns %d.LCDcolumns rows %d.LCDrows",
+			"lcdAddress",
+			"0x27",
+			"16",
+			"2",
+			{
+				"inc":"#include \"LiquidCrystal_I2C_hf.h\"\n",
+				"def":"LiquidCrystal_I2C lcd({0}, {1}, {2});\n",
+				"setup":"lcd.begin();\nlcd.backlight();\n",
+				"work":"",
+				"loop":"" 
+			}
+		],
+		["w",
+			"LCD clear",
+			"lcdClear",
+			{
+				"inc":"",
+				"def":"",
+				"setup":"",
+				"work":"lcd.clear();\n",
+				"loop":"" 
+			}
+		],
+		["w",
+			"LCD set cursor column %d row %d",
+			"lcdSetCursor",
+			"0",
+			"0",
+			{
+				"inc":"",
+				"def":"",
+				"setup":"",
+				"work":"lcd.setCursor({0},{1});\n",
+				"loop":"" 
+			}
+		],
+		["w",
+			"LCD print %s",
+			"lcdPrint",
+			"hello",
+			{
+				"inc":"",
+				"def":"",
+				"setup":"",
+				"work":"lcd.print({0});\n",
+				"loop":"" 
+			}
 		]
-
 	],
 	"menus": {
 		"digital":["HIGH","LOW"],
 		"mp3repeat":["once", "repeat"],
-		"mp3command":["Play next track","Play previous track","Increase volume","Decrease volume","Pause","Resume","Stop"]
+		"mp3command":["Play next track","Play previous track","Increase volume","Decrease volume","Pause","Resume","Stop"],
+		"LCDI2C": ["0x27", "0x3F"],
+		"LCDrows": ["1", "2", "3", "4"],
+		"LCDcolumns": ["16", "20"],
+		"LCDcommand": ["clear", "home"]
 	},
 	"values":{
 		"HIGH":1,
@@ -149,13 +202,15 @@
 		"Decrease volume": 5,
 		"Pause": 14,
 		"Resume": 13,
-		"Stop": 22
+		"Stop": 22,
+		"clear": "clear",
+		"home": "home"
 	},
 	"translators":{
 		"zh_CN":{
 			"HIGH":"高电平",
 			"LOW":"低电平",
-			"digitalWrite( %n , %d.digital )":"数字口输出( %n ,%d.digital )",
+			"digitalWrite( %n , %d.digital )":"数字口输出( %n ,%d.digital )"
 		}
 	}
 }
