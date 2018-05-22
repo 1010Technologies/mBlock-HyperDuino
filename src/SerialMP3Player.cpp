@@ -146,6 +146,10 @@ int MP3_sendCommand(int8_t command, int16_t dat)
     }
     mp3.stopListening();
   }
+  else
+  {
+    delay(150);
+  }
 
   return result;
 }

@@ -83,15 +83,16 @@
 		}
 		],
 		["w",
-		"play MP3 track %n from folder %n",
+		"play MP3 track %n from folder %n %d.mp3repeat",
 		"serialmp3play",
 		"1",
 		"1",
+		"once",
 		{
 			"setup":"",
 			"inc":"#include \"SerialMP3Player.h\"\n",
 			"def":"",
-			"work":"if (MP3_IsAvailable()) MP3_sendCommand(CMD_PLAY_FOLDER_FILE, {1}*256 + {0});\n",
+			"work":"if (MP3_IsAvailable()) {\nMP3_sendCommand(CMD_PLAY_FOLDER_FILE, {1}*256 + {0});\nif ({2}) MP3_sendCommand(CMD_SET_SNGL_CYCL, 0);\n}\n",
 			"loop":""
 		}
 		],
@@ -134,11 +135,14 @@
 	],
 	"menus": {
 		"digital":["HIGH","LOW"],
+		"mp3repeat":["once", "repeat"],
 		"mp3command":["Play next track","Play previous track","Increase volume","Decrease volume","Pause","Resume","Stop"]
 	},
 	"values":{
 		"HIGH":1,
 		"LOW":0,
+		"once":0,
+		"repeat":1,
 		"Play next track": 1,
 		"Play previous track": 2,
 		"Increase volume": 4,

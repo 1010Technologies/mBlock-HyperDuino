@@ -1,3 +1,4 @@
+#include <stdint.h>
 
 // The MP3 player is attached to these pins
 // Set RX to -1 to prevent callbacks from the Serial MP3 to the Arduino,
