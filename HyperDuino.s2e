@@ -180,6 +180,120 @@
 				"work":"lcd.print({0});\n",
 				"loop":"" 
 			}
+		],
+		["w",
+			"Bluetooth setup TX %d.BT_TX RX %d.BT_RX",
+			"btSetup",
+			"A2",
+			"A3",
+			{
+				"inc":"#include <SoftwareSerial.h>\n#include \"ArduinoBlue_hf.h\"\n",
+				"def":"SoftwareSerial bluetooth({0}, {1});\nArduinoBlue phone(bluetooth);\n",
+				"setup":"bluetooth.begin(9600);\ndelay(200);\n",
+				"work":"",
+				"loop":"" 
+			}
+		],
+		["b",
+			"Bluetooth is connected",
+			"btConnected",
+			{
+				"inc":"",
+				"def":"",
+				"setup":"",
+				"work":"phone.isConnected()",
+				"loop":"" 
+			}
+		],
+		["r",
+			"Bluetooth get button",
+			"btGetButton",
+			{
+				"inc":"",
+				"def":"",
+				"setup":"",
+				"work":"phone.getButton()",
+				"loop":"" 
+			}
+		],
+		["r",
+			"Bluetooth get text",
+			"btGetText",
+			{
+				"inc":"",
+				"def":"",
+				"setup":"",
+				"work":"phone.getText()",
+				"loop":"" 
+			}
+		],
+		["r",
+			"Bluetooth get throttle",
+			"btGetThrottle",
+			{
+				"inc":"",
+				"def":"",
+				"setup":"",
+				"work":"phone.getThrottle()",
+				"loop":"" 
+			}
+		],
+		["r",
+			"Bluetooth get steering",
+			"btGetSteering",
+			{
+				"inc":"",
+				"def":"",
+				"setup":"",
+				"work":"phone.getSteering()",
+				"loop":"" 
+			}
+		],
+		["r",
+			"Bluetooth get slider ID",
+			"btGetSliderID",
+			{
+				"inc":"",
+				"def":"",
+				"setup":"",
+				"work":"phone.getSliderId()",
+				"loop":"" 
+			}
+		],
+		["r",
+			"Bluetooth get slider value",
+			"btGetSliderValue",
+			{
+				"inc":"",
+				"def":"",
+				"setup":"",
+				"work":"phone.getSliderVal()",
+				"loop":"" 
+			}
+		],
+		["w",
+			"Bluetooth send text %s",
+			"btSendText",
+			"hello",
+			{
+				"inc":"",
+				"def":"",
+				"setup":"",
+				"work":"phone.sendText({0});\n",
+				"loop":"" 
+			}
+		],
+		["w",
+			"Bluetooth rename %s",
+			"btRename",
+			"BT1010",
+			{
+				"inc":"",
+				"def":"",
+				"setup":"bluetooth.write(\"AT+NAME\" {0});\ndelay(1000);\n",
+				"work":"",
+				"loop":"" 
+			}
 		]
 	],
 	"menus": {
@@ -189,7 +303,9 @@
 		"LCDI2C": ["0x27", "0x3F"],
 		"LCDrows": ["1", "2", "3", "4"],
 		"LCDcolumns": ["16", "20"],
-		"LCDcommand": ["clear", "home"]
+		"LCDcommand": ["clear", "home"],
+		"BT_TX": ["A0","A1","A2","A3","A4","A5",2,3,4,5,6,7,8,9,10,11,12],
+		"BT_RX": ["A0","A1","A2","A3","A4","A5",2,3,4,5,6,7,8,9,10,11,12]
 	},
 	"values":{
 		"HIGH":1,
@@ -204,7 +320,13 @@
 		"Resume": 13,
 		"Stop": 22,
 		"clear": "clear",
-		"home": "home"
+		"home": "home",
+		"A0": 14,
+		"A1": 15,
+		"A2": 16,
+		"A3": 17,
+		"A4": 18,
+		"A5": 19
 	},
 	"translators":{
 		"zh_CN":{
