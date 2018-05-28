@@ -1,0 +1,16 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "create zip file",
+      "type": "shell",
+      "command": "cd ..; rm *.zip; zip --exclude \\*.git\\* \\*.vscode\\* -r mblock.zip ${workspaceFolderBasename}",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
