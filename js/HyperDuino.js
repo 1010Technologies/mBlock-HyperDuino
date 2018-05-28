@@ -59,19 +59,19 @@
     ext.runArduino = function(){
         responseValue();
     };
-    ext.runMotor = function(pin,level) {
+    ext.motorForward = function(pin,level) {
         runPackage(30,pin,typeof level=="string"?levels[level]:new Number(level));
     };
-    ext.runMotor2 = function(pin,level) {
+    ext.motorBackward = function(pin,level) {
         runPackage(30,pin,typeof level=="string"?levels[level]:new Number(level));
     };
-    ext.runMotor3 = function(pin,level) {
+    ext.motorLeft = function(pin,level) {
         runPackage(30,pin,typeof level=="string"?levels[level]:new Number(level));
     };
-    ext.runMotor4 = function(pin,level) {
+    ext.motorRight = function(pin,level) {
         runPackage(30,pin,typeof level=="string"?levels[level]:new Number(level));
     };
-    ext.runMotor5 = function(pin,level) {
+    ext.motorStop = function(pin,level) {
         runPackage(30,pin,typeof level=="string"?levels[level]:new Number(level));
     };
     ext.runPwm = function(pin,pwm) {
@@ -284,5 +284,5 @@
     }
 
     var descriptor = {};
-    ScratchExtensions.register('HyperDuino v3.5R', descriptor, ext, {type: 'serial'});
+    ScratchExtensions.register('HyperDuino', descriptor, ext, {type: 'serial'});
 })({});
