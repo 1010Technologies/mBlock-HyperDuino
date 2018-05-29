@@ -12,9 +12,9 @@
 
 		["w", "HyperDuino board %d.board",
 			"setBoard",
-			"HD4.0",
+			"HD 4",
 			{
-				"inc":"#define BOARD {0}\n#include \"HyperDuino.h\"\n",
+				"inc":"#define BOARD {0}\n",
 				"def":"",
 				"setup":"",
 				"work":"",
@@ -35,27 +35,29 @@
 		],
 
 		["w",
-		"motor move forward at speed: %n",
+		"motor move forward speed A: %n B: %n",
 		"motorForward",
 		"255",
+		"255",
 		{
-			"setup":"hd_MotorSetup();\n",
-			"inc":"",
+			"inc":"#include \"HyperDuino.h\"\n",
 			"def":"",
-			"work":"hd_MotorForward({0});\n",
+			"setup":"hd_MotorSetup(BOARD);\n",
+			"work":"hd_MotorForward({0},{1});\n",
 			"loop":""
 		}
 		],
 
 		["w",
-		"motor move backward at speed: %n",
+		"motor move backward speed A: %n B: %n",
 		"motorBackward",
 		"255",
+		"255",
 		{
-			"setup":"hd_MotorSetup();\n",
-			"inc":"",
+			"inc":"#include \"HyperDuino.h\"\n",
 			"def":"",
-			"work":"hd_MotorBackward({0});\n",
+			"setup":"hd_MotorSetup(BOARD);\n",
+			"work":"hd_MotorBackward({0},{1});\n",
 			"loop":""
 		}
 		],
@@ -64,9 +66,9 @@
 		"motorLeft",
 		"255",
 		{
-			"setup":"hd_MotorSetup();\n",
-			"inc":"",
+			"inc":"#include \"HyperDuino.h\"\n",
 			"def":"",
+			"setup":"hd_MotorSetup(BOARD);\n",
 			"work":"hd_MotorLeft({0});\n",
 			"loop":""
 		}
@@ -76,9 +78,9 @@
 		"motorRight",
 		"255",
 		{
-			"setup":"hd_MotorSetup();\n",
-			"inc":"",
+			"inc":"#include \"HyperDuino.h\"\n",
 			"def":"",
+			"setup":"hd_MotorSetup(BOARD);\n",
 			"work":"hd_MotorRight({0});\n",
 			"loop":""
 		}
@@ -87,9 +89,9 @@
 		"motor stop",
 		"motorStop",
 		{
-			"setup":"hd_MotorSetup();\n",
-			"inc":"",
+			"inc":"#include \"HyperDuino.h\"\n",
 			"def":"",
+			"setup":"hd_MotorSetup(BOARD);\n",
 			"work":"hd_MotorStop();\n",
 			"loop":""
 		}
@@ -309,7 +311,7 @@
 		]
 	],
 	"menus": {
-		"board": ["HD1.0","HD2.4","HD3.5","HD4.0"],
+		"board": ["HD 2","HD 3","HD 4"],
 		"digital":["HIGH","LOW"],
 		"mp3repeat":["once", "repeat"],
 		"mp3command":["Play next track","Play previous track","Increase volume","Decrease volume","Pause","Resume","Stop"],
@@ -320,10 +322,9 @@
 		"BT_RX": ["A0","A1","A2","A3","A4","A5",2,3,4,5,6,7,8,9,10,11,12]
 	},
 	"values":{
-		"HD1.0":100,
-		"HD2.4":240,
-		"HD3.5":350,
-		"HD4.0":400,
+		"HD 2":240,
+		"HD 3":350,
+		"HD 4":400,
 		"HIGH":1,
 		"LOW":0,
 		"once":0,
