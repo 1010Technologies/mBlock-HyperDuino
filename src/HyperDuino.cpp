@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <SoftwareSerial.h>
 #include "HyperDuino.h"
 #include "MPR121_hf.h"
 
@@ -13,6 +14,26 @@ bool isPinTouched(int pin)
     return Capsense.isPinTouched(pin);
   }
   return false;
+}
+
+void hd_softSerialSend(SoftwareSerial &sSerial, char *s)
+{
+  sSerial.write(s);
+  delay(30);
+}
+
+String hd_softSerialReceive(SoftwareSerial &sSerial)
+{
+  delay(30);
+  String result = "";
+  while (sSerial.available()) result += sSerial.read();
+  return result;
+}
+
+String hd_softSerialSendReceive(SoftwareSerial &sSerial, char *s)
+{
+  hd_softSerialSend(sSerial, s);
+  return hd_softSerialReceive(sSerial);
 }
 
 byte MOTOR_A1 = 0;
