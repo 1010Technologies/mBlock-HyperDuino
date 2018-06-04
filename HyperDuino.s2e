@@ -208,17 +208,6 @@
 				"loop":"" 
 			}
 		],
-		["b",
-			"Bluetooth is available",
-			"btAvailable",
-			{
-				"inc":"#include \"HyperDuino.h\"\n",
-				"def":" ",
-				"setup":"",
-				"work":"(hd_softSerialSendReceive(bluetooth,\"AT+ADDR?\") != \"\")",
-				"loop":"" 
-			}
-		],
 		["w",
 			"Bluetooth rename %s",
 			"btRename",
