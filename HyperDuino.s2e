@@ -104,7 +104,7 @@
 		"once",
 		{
 			"setup":"",
-			"inc":"#include \"SerialMP3Player.h\"\n",
+			"inc":"#include \"HyperDuino.h\"\n",
 			"def":"",
 			"work":"if (MP3_IsAvailable()) {\nMP3_sendCommand(CMD_PLAY_FOLDER_FILE, {1}*256 + {0});\nif ({2}) MP3_sendCommand(CMD_SET_SNGL_CYCL, 0);\n}\n",
 			"loop":""
@@ -116,7 +116,7 @@
 		"Play next track",
 		{
 			"setup":"",
-			"inc":"#include \"SerialMP3Player.h\"\n",
+			"inc":"#include \"HyperDuino.h\"\n",
 			"def":"",
 			"work":"if (MP3_IsAvailable()) MP3_sendCommand({0}, 0);\n",
 			"loop":"" 
@@ -128,7 +128,7 @@
 		"30",
 		{
 			"setup":"",
-			"inc":"#include \"SerialMP3Player.h\"\n",
+			"inc":"#include \"HyperDuino.h\"\n",
 			"def":"",
 			"work":"if (MP3_IsAvailable()) MP3_sendCommand(CMD_SET_VOLUME, {0});\n",
 			"loop":"" 
@@ -139,7 +139,7 @@
 		"serialmp3isplaying",
 		{
 			"setup":"",
-			"inc":"#include \"SerialMP3Player.h\"\n",
+			"inc":"#include \"HyperDuino.h\"\n",
 			"def":"",
 			"work":"(MP3_IsAvailable() && MP3_sendCommand(CMD_QUERY_STATUS, 0) == 1)",
 			"loop":""
@@ -152,7 +152,7 @@
 			"16",
 			"2",
 			{
-				"inc":"#include \"LiquidCrystal_I2C_hf.h\"\n",
+				"inc":"#include \"HyperDuino.h\"\n",
 				"def":"LiquidCrystal_I2C lcd({0}, {1}, {2});\n",
 				"setup":"lcd.begin();\nlcd.backlight();\n",
 				"work":"",
@@ -163,7 +163,7 @@
 			"LCD clear",
 			"lcdClear",
 			{
-				"inc":"",
+				"inc":"#include \"HyperDuino.h\"\n",
 				"def":"",
 				"setup":"",
 				"work":"lcd.clear();\n",
@@ -176,7 +176,7 @@
 			"0",
 			"0",
 			{
-				"inc":"",
+				"inc":"#include \"HyperDuino.h\"\n",
 				"def":"",
 				"setup":"",
 				"work":"lcd.setCursor({0},{1});\n",
@@ -188,7 +188,7 @@
 			"lcdPrint",
 			"hello",
 			{
-				"inc":"",
+				"inc":"#include \"HyperDuino.h\"\n",
 				"def":"",
 				"setup":"",
 				"work":"lcd.print({0});\n",

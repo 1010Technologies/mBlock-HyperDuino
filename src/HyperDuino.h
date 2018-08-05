@@ -1,6 +1,14 @@
 #include <Arduino.h>
 #include "MPR121_hf.h"
 
+// Ideally, we would only include these within the blocks that use them.
+// However, mBlock appears to have a bug where it will sometimes erase one
+// block's #include lines if another block has a different #include.
+// So, to avoid this, just always include everything. This is messy but won't
+// cause code bloat because the Arduino compiler strips out unused functions.
+#include "LiquidCrystal_I2C_hf.h"
+#include "SerialMP3Player.h"
+
 bool isPinTouched(int pin);
 
 String hd_softSerialSendReceive(SoftwareSerial &sSerial, char *s);
