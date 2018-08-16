@@ -1,6 +1,6 @@
 {	"extensionName": "HyperDuino",
 	"description": "A Block-Based Programming Environment for the HyperDuino",
-	"version": "1.4.2",
+	"version": "1.4.3",
 	"author": "Roger Wagner(hyperduino@1010technologies.com)",
 	"homepage": "http://hyperduino.com/",
 	"sort":0,
