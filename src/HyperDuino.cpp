@@ -6,6 +6,8 @@
 #define IS_PIN_TOUCH(p)         ((p) >= 20 && (p) < 32)
 #define PIN_TO_TOUCH(p)         ((p) - 20)
 
+int playFrequencyDelay[11] = {0};
+
 bool isPinTouched(int pin)
 {
   if (pin >= 2 && pin <= 13 && Capsense.isCapsenseAvailable() &&
@@ -34,6 +36,44 @@ String hd_softSerialSendReceive(SoftwareSerial &sSerial, char *s)
 {
   hd_softSerialSend(sSerial, s);
   return hd_softSerialReceive(sSerial);
+}
+
+void hd_PlayFrequency(float freq, int pin)
+{
+  float freq1 = freq;
+  if (freq1 > 500) freq1 = 500;
+  if (pin >= 2 && pin <= 13)
+  {
+    if (freq1 > 0) {
+      pinMode(pin, OUTPUT);
+      playFrequencyDelay[pin-2] = (int) (500/freq1 + 0.5);
+    } else {
+      playFrequencyDelay[pin - 2] = 0;
+    }
+  }
+}
+
+void hd_StopPlayFrequency(int pin)
+{
+  if (pin >= 2 && pin <= 13)
+  {
+    playFrequencyDelay[pin - 2] = 0;
+    digitalWrite(pin, LOW);
+  }
+}
+
+// Used by hd_PlayFrequency
+// Interrupt is called once a millisecond, to update the LEDs
+SIGNAL(TIMER0_COMPA_vect)
+{
+  unsigned long t = millis();
+  for (int i = 2; i < 13; i++)
+  {
+    if (playFrequencyDelay[i - 2] != 0 && (t % playFrequencyDelay[i - 2]) == 0)
+    {
+      digitalWrite(i, 1 - digitalRead(i));
+    }
+  }
 }
 
 byte MOTOR_A1 = 0;
