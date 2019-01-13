@@ -6,7 +6,7 @@
 #define IS_PIN_TOUCH(p)         ((p) >= 20 && (p) < 32)
 #define PIN_TO_TOUCH(p)         ((p) - 20)
 
-int playFrequencyDelay[11] = {0};
+int playFrequencyDelay[12] = {0};
 
 bool isPinTouched(int pin)
 {
@@ -46,7 +46,7 @@ void hd_PlayFrequency(float freq, int pin)
   {
     if (freq1 > 0) {
       pinMode(pin, OUTPUT);
-      playFrequencyDelay[pin-2] = (int) (500/freq1 + 0.5);
+      playFrequencyDelay[pin - 2] = (int) (500/freq1 + 0.5);
     } else {
       playFrequencyDelay[pin - 2] = 0;
     }
@@ -67,11 +67,11 @@ void hd_StopPlayFrequency(int pin)
 SIGNAL(TIMER0_COMPA_vect)
 {
   unsigned long t = millis();
-  for (int i = 2; i < 13; i++)
+  for (int pin = 2; pin <= 13; pin++)
   {
-    if (playFrequencyDelay[i - 2] != 0 && (t % playFrequencyDelay[i - 2]) == 0)
+    if (playFrequencyDelay[pin - 2] != 0 && (t % playFrequencyDelay[pin - 2]) == 0)
     {
-      digitalWrite(i, 1 - digitalRead(i));
+      digitalWrite(pin, 1 - digitalRead(pin));
     }
   }
 }
