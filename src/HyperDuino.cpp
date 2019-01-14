@@ -7,15 +7,45 @@
 #define PIN_TO_TOUCH(p)         ((p) - 20)
 
 int playFrequencyDelay[12] = {0};
+int playFrequencyOffset[12] = {0};
 
-bool isPinTouched(int pin)
+bool isCapsenseInitialized = false;
+
+void hd_InitCapsense()
 {
-  if (pin >= 2 && pin <= 13 && Capsense.isCapsenseAvailable() &&
-    Capsense.isCableConnected())
+  if (!isCapsenseInitialized)
   {
-    return Capsense.isPinTouched(pin);
+    isCapsenseInitialized = true;
+    Capsense.begin(CAPSENSE_ADDRESS, CAPSENSE_PINS);
+    for (int _i = 2; _i <= 13; _i++)
+    {
+      pinMode(_i, OUTPUT);
+    }
+  }
+}
+
+bool hd_isPinTouched(int pin)
+{
+  if (Capsense.isCapsenseAvailable() && Capsense.isCableConnected())
+  {
+    if (pin >= 2 && pin <= 13)
+    {
+      return Capsense.isPinTouched(pin);
+    }
   }
   return false;
+}
+
+int hd_getTouchPin()
+{
+  if (Capsense.isCapsenseAvailable() && Capsense.isCableConnected())
+  {
+    for (int pin=2; pin <= 13; pin++)
+    {
+      if (Capsense.isPinTouched(pin)) return pin;
+    }
+  }
+  return 0;
 }
 
 void hd_softSerialSend(SoftwareSerial &sSerial, char *s)
@@ -38,6 +68,13 @@ String hd_softSerialSendReceive(SoftwareSerial &sSerial, char *s)
   return hd_softSerialReceive(sSerial);
 }
 
+void hd_InitPlayFrequency()
+{
+  // Use Timer0 (millis) for hd_PlayFrequency
+  OCR0A = 0xAF;
+  TIMSK0 |= _BV(OCIE0A);
+}
+
 void hd_PlayFrequency(float freq, int pin)
 {
   float freq1 = freq;
@@ -47,6 +84,7 @@ void hd_PlayFrequency(float freq, int pin)
     if (freq1 > 0) {
       pinMode(pin, OUTPUT);
       playFrequencyDelay[pin - 2] = (int) (500/freq1 + 0.5);
+      playFrequencyOffset[pin - 2] = millis() % playFrequencyDelay[pin - 2];
     } else {
       playFrequencyDelay[pin - 2] = 0;
     }
@@ -69,7 +107,8 @@ SIGNAL(TIMER0_COMPA_vect)
   unsigned long t = millis();
   for (int pin = 2; pin <= 13; pin++)
   {
-    if (playFrequencyDelay[pin - 2] != 0 && (t % playFrequencyDelay[pin - 2]) == 0)
+    int pd = playFrequencyDelay[pin - 2];
+    if (pd != 0 && (t - playFrequencyOffset[pin - 2]) % pd == 0)
     {
       digitalWrite(pin, 1 - digitalRead(pin));
     }

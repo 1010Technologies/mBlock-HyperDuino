@@ -1,6 +1,6 @@
 {	"extensionName": "HyperDuino",
 	"description": "A Block-Based Programming Environment for the HyperDuino",
-	"version": "1.4.5",
+	"version": "1.4.6",
 	"author": "Roger Wagner(hyperduino@1010technologies.com)",
 	"homepage": "http://hyperduino.com/",
 	"sort":0,
@@ -27,23 +27,36 @@
 		"2",
 		{
 			"inc":"#include \"HyperDuino.h\"\n",
-			"def":"#define CAPSENSE_ADDRESS 0x5A\n#define CAPSENSE_PINS 12\n",
-			"setup":"Capsense.begin(CAPSENSE_ADDRESS, CAPSENSE_PINS);\nfor (int _i=2;_i<=13;_i++) pinMode(_i,OUTPUT);\n",
-			"work":"(isPinTouched({0}))",
+			"def":"",
+			"setup":"hd_InitCapsense();\n",
+			"work":"(hd_isPinTouched({0}))",
 			"loop":""
 		}
 		],
 
     [
+      "r",
+      "get HyperDuino touch pin",
+      "getTouchPin",
+      {
+        "inc": "#include \"HyperDuino.h\"\n",
+        "def": "",
+        "setup": "hd_InitCapsense();\n",
+        "work": "(hd_getTouchPin())",
+        "loop": ""
+      }
+    ],
+
+    [
       "w",
-      "Play %n times per second on pin %n",
+      "play %n times per second on pin %n",
       "playFrequency",
       "10",
       "13",
       {
         "inc": "#include \"HyperDuino.h\"\n",
         "def": "",
-        "setup": "// Use Timer0 (millis) for hd_PlayFrequency\nOCR0A = 0xAF;\nTIMSK0 |= _BV(OCIE0A);\n",
+        "setup": "hd_InitPlayFrequency();\n",
         "work": "hd_PlayFrequency({0},{1});\n",
         "loop": ""
       }
@@ -51,7 +64,7 @@
 
     [
       "w",
-      "Stop playing on pin %n",
+      "stop playing on pin %n",
       "stopPlayFrequency",
       "13",
       {
