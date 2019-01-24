@@ -198,16 +198,21 @@ void hd_MotorRight(int speed)
   hd_MotorMove(-abs(speed), abs(speed));
 }
 
-void hd_MotorStop(void)
+void hd_MotorStop(int motor)
 {
   if (MOTOR_A1 != 0)
   {
-    if (MOTOR_ENABLE != 0) digitalWrite(MOTOR_ENABLE, LOW);
-    analogWrite(MOTOR_BSPEED, 0);
-    analogWrite(MOTOR_ASPEED, 0);
-    digitalWrite(MOTOR_A1, LOW);
-    digitalWrite(MOTOR_A2, LOW);
-    digitalWrite(MOTOR_B1, LOW);
-    digitalWrite(MOTOR_B2, LOW);
+    if (motor & 1)
+    {
+      analogWrite(MOTOR_ASPEED, 0);
+      digitalWrite(MOTOR_A1, LOW);
+      digitalWrite(MOTOR_A2, LOW);
+    }
+    if (motor & 2)
+    {
+      analogWrite(MOTOR_BSPEED, 0);
+      digitalWrite(MOTOR_B1, LOW);
+      digitalWrite(MOTOR_B2, LOW);
+    }
   }
 }

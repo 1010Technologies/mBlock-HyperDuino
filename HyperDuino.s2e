@@ -1,6 +1,6 @@
 {	"extensionName": "HyperDuino",
 	"description": "A Block-Based Programming Environment for the HyperDuino",
-	"version": "1.4.6",
+	"version": "1.4.7",
 	"author": "Roger Wagner(hyperduino@1010technologies.com)",
 	"homepage": "http://hyperduino.com/",
 	"sort":0,
@@ -131,13 +131,14 @@
 		],
 
     ["w",
-		"motor stop",
-		"motorStop",
+		"motor stop %d.motorStop",
+    "motorStop",
+    "A+B",
 		{
 			"inc":"#include \"HyperDuino.h\"\n",
 			"def":"",
 			"setup":"hd_MotorSetup(BOARD);\n",
-			"work":"hd_MotorStop();\n",
+			"work":"hd_MotorStop({0});\n",
 			"loop":""
 		}
 		],
@@ -390,6 +391,7 @@
   "menus": {
 		"board": ["HD 2","HD 3","HD 4"],
 		"digital":["HIGH","LOW"],
+    "motorStop": ["A", "B", "A+B"],
 		"mp3repeat":["once", "repeat"],
 		"mp3command":["Play next track","Play previous track","Increase volume","Decrease volume","Pause","Resume","Stop"],
 		"LCDI2C": ["0x27", "0x3F"],
@@ -400,6 +402,9 @@
 	},
 
   "values":{
+    "A": 1,
+    "B": 2,
+    "A+B": 3,
 		"HD 2":240,
 		"HD 3":350,
 		"HD 4":400,
