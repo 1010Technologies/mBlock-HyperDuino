@@ -11,6 +11,9 @@ int playFrequencyOffset[12] = {0};
 
 bool isCapsenseInitialized = false;
 
+#define BUFLEN 80
+char buf[BUFLEN+1] = {0};
+
 void hd_InitCapsense()
 {
   if (!isCapsenseInitialized)
@@ -48,18 +51,49 @@ int hd_getTouchPin()
   return 0;
 }
 
-void hd_softSerialSend(SoftwareSerial &sSerial, char *s)
+String bluetoothResponse = "";
+
+void hd_bluetoothCheckResponse(SoftwareSerial &sSerial) 
 {
-  sSerial.write(s);
   delay(30);
+  int i = 0;
+  while (sSerial.available() && i < BUFLEN)
+  {
+    buf[i++] = sSerial.read();
+  }
+  if (i > 0)
+  {
+    buf[i] = '\0';
+  }
+}
+
+bool hd_bluetoothHasResponse(SoftwareSerial &sSerial)
+{
+  hd_bluetoothCheckResponse(sSerial);
+  return (strlen(buf) > 0);
+}
+
+String hd_bluetoothGetResponse()
+{
+  if (strlen(buf) > 0)
+  {
+    String result(buf);
+    buf[0] = '\0';
+    return result;
+  }
+  return "";
 }
 
 String hd_softSerialReceive(SoftwareSerial &sSerial)
 {
+  hd_bluetoothCheckResponse(sSerial);
+  return hd_bluetoothGetResponse();
+}
+
+void hd_softSerialSend(SoftwareSerial &sSerial, char *s)
+{
+  sSerial.write(s);
   delay(30);
-  String result = "";
-  while (sSerial.available()) result += sSerial.read();
-  return result;
 }
 
 String hd_softSerialSendReceive(SoftwareSerial &sSerial, char *s)
@@ -68,24 +102,107 @@ String hd_softSerialSendReceive(SoftwareSerial &sSerial, char *s)
   return hd_softSerialReceive(sSerial);
 }
 
-void hd_InitPlayFrequency()
+// Length in bytes of Bitty messages (including the opcode)
+byte bittyLen[9] = {0, 2, 3, 3, 2, 3, 2, 2, 7};
+char bittyMsg[7] = {0};
+
+bool hd_bittyControllerHasEvent(SoftwareSerial &sSerial)
 {
-  // Use Timer0 (millis) for hd_PlayFrequency
-  OCR0A = 0xAF;
-  TIMSK0 |= _BV(OCIE0A);
+  hd_bluetoothCheckResponse(sSerial);
+  char c = buf[0];
+  if (c > 0 && c <= 8 && strlen(buf) == bittyLen[c])
+  {
+    memcpy(bittyMsg, buf, bittyLen[c]);
+    buf[0] = '\0';
+    return true;
+  }
+  return false;
 }
 
-void hd_PlayFrequency(float freq, int pin)
+bool hd_bittyControllerEvent(String event)
 {
-  float freq1 = freq;
-  if (freq1 > 500) freq1 = 500;
-  if (pin >= 2 && pin <= 13)
+  if (event == "Dpad")
+    return bittyMsg[0] == 1;
+  if (event == "Touchpad motion")
+    return bittyMsg[0] == 2;
+  if (event == "Touchpad control")
+    return bittyMsg[0] == 3;
+  if (event == "Other control")
+    return bittyMsg[0] == 4;
+  if (event == "Sampling Control")
+    return bittyMsg[0] == 6;
+  if (event == "Pad")
+    return bittyMsg[0] == 7;
+  if (event == "Pin")
+    return bittyMsg[0] == 8;
+  return false;
+}
+
+//   01 - left pad, top button - pressed
+//   02 - left pad, top button - released
+//   03 - left pad, bottom button - pressed
+//   04 - left pad, bottom button - released
+//   05 - left pad, left button - pressed
+//   06 - left pad, left button - released
+//   07 - left pad, right button - pressed
+//   08 - left pad, right button - released
+//   09 - right pad, top button - pressed
+//   10 - right pad, top button - released
+//   11 - right pad, bottom button - pressed
+//   12 - right pad, bottom button - released
+//   13 - right pad, left button - pressed
+//   14 - right pad, left button - released
+//   15 - right pad, right button - pressed
+//   16 - right pad, right button - released
+bool hd_bittyControllerDpad(String dpad, String button, int pressed)
+{
+  if (bittyMsg[0] != 1)
+    return false;
+  int d = bittyMsg[1];
+  if (d < 1 || d > 16)
+    return false;
+  if (pressed && d % 2 != 1)
+    return false;
+  if (dpad == "left") {
+    if (bittyMsg[1] > 8)
+      return false;
+  } else if (bittyMsg[1] < 9) {
+    return false;
+  }
+  d = ((d - 1) % 8)/2;
+  switch (d)
   {
-    if (freq1 > 0) {
-      pinMode(pin, OUTPUT);
-      playFrequencyDelay[pin - 2] = (int) (500/freq1 + 0.5);
-      playFrequencyOffset[pin - 2] = millis() % playFrequencyDelay[pin - 2];
-    } else {
+    case 0:
+      return (button == "top");
+    case 1:
+      return (button == "bottom");
+    case 2:
+      return (button == "left");
+    case 3:
+      return (button == "right");
+    }
+}
+
+void hd_InitPlayFrequency()
+  {
+    // Use Timer0 (millis) for hd_PlayFrequency
+    OCR0A = 0xAF;
+    TIMSK0 |= _BV(OCIE0A);
+  }
+
+  void hd_PlayFrequency(float freq, int pin)
+  {
+    float freq1 = freq;
+    if (freq1 > 500)
+      freq1 = 500;
+    if (pin >= 2 && pin <= 13)
+    {
+      if (freq1 > 0)
+      {
+        pinMode(pin, OUTPUT);
+        playFrequencyDelay[pin - 2] = (int)(500 / freq1 + 0.5);
+        playFrequencyOffset[pin - 2] = millis() % playFrequencyDelay[pin - 2];
+      } else {
       playFrequencyDelay[pin - 2] = 0;
     }
   }

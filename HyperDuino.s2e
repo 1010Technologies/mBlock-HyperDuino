@@ -1,6 +1,6 @@
 {	"extensionName": "HyperDuino",
 	"description": "A Block-Based Programming Environment for the HyperDuino",
-	"version": "1.4.7",
+	"version": "1.4.8",
 	"author": "Roger Wagner(hyperduino@1010technologies.com)",
 	"homepage": "http://hyperduino.com/",
 	"sort":0,
@@ -253,8 +253,8 @@
     ["w",
 			"Bluetooth setup TX %d.BT_TX RX %d.BT_RX",
 			"btSetup",
-			"A2",
-			"A3",
+			"A1",
+			"A0",
 			{
 				"inc":"#include <SoftwareSerial.h>\n",
 				"def":"SoftwareSerial bluetooth({0}, {1});\n",
@@ -290,8 +290,21 @@
 			}
 		],
 
+    [
+      "b",
+      "Bluetooth has response",
+      "btHasResponse",
+      {
+        "inc": "#include \"HyperDuino.h\"\n",
+        "def": "",
+        "setup": "",
+        "work": "hd_bluetoothHasResponse(bluetooth)",
+        "loop": ""
+      }
+    ],
+
     ["r",
-			"Bluetooth receive response",
+			"Bluetooth response",
 			"btReceive",
 			{
 				"inc":"#include \"HyperDuino.h\"\n",
@@ -302,6 +315,49 @@
 			}
 		],
 
+    [
+      "b",
+      "Bitty Controller has event",
+      "btBittyHasEvent",
+      {
+        "inc": "#include \"HyperDuino.h\"\n",
+        "def": "",
+        "setup": "",
+        "work": "hd_bittyControllerHasEvent(bluetooth)",
+        "loop": ""
+      }
+    ],
+
+    [
+      "b",
+      "Bitty Controller event %d.BITTY_EVENT",
+      "btBittyEvent",
+      "Dpad",
+      {
+        "inc": "#include \"HyperDuino.h\"\n",
+        "def": "",
+        "setup": "",
+        "work": "hd_bittyControllerEvent({0})",
+        "loop": ""
+      }
+    ],
+
+    [
+      "b",
+      "Bitty %d.DPAD_PAD dpad, %d.DPAD_BUTTON button, %d.DPAD_STATE",
+      "btBittyDpadEvent",
+      "left",
+      "top",
+      "pressed",
+      {
+        "inc": "#include \"HyperDuino.h\"\n",
+        "def": "",
+        "setup": "",
+        "work": "hd_bittyControllerDpad({0}, {1}, {2})",
+        "loop": ""
+      }
+    ],
+  
     ["r",
 			"ArduinoBlue get button",
 			"abGetButton",
@@ -398,9 +454,13 @@
 		"LCDrows": ["1", "2", "3", "4"],
 		"LCDcolumns": ["16", "20"],
 		"BT_TX": ["A0","A1","A2","A3","A4","A5",2,3,4,5,6,7,8,9,10,11,12],
-		"BT_RX": ["A0","A1","A2","A3","A4","A5",2,3,4,5,6,7,8,9,10,11,12]
+		"BT_RX": ["A0","A1","A2","A3","A4","A5",2,3,4,5,6,7,8,9,10,11,12],
+    "BITTY_EVENT": ["Dpad","Touchpad motion","Touchpad control","Other control","Sampling Control","Pad", "Pin"],
+    "DPAD_PAD": ["left", "right"],
+    "DPAD_BUTTON": ["top", "bottom", "left", "right"],
+    "DPAD_STATE": ["pressed", "released"]
 	},
-
+    
   "values":{
     "A": 1,
     "B": 2,
@@ -424,8 +484,10 @@
 		"A2": 16,
 		"A3": 17,
 		"A4": 18,
-		"A5": 19
-	},
+		"A5": 19,
+    "pressed": 1,
+    "released": 0
+  },
 
   "translators":{
 		"zh_CN":{

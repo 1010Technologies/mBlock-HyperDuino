@@ -20,6 +20,11 @@ String hd_softSerialSendReceive(SoftwareSerial &sSerial, char *s);
 void hd_softSerialSend(SoftwareSerial &sSerial, char *s);
 String hd_softSerialReceive(SoftwareSerial &sSerial);
 
+bool hd_bluetoothHasResponse(SoftwareSerial &sSerial);
+bool hd_bittyControllerHasEvent(SoftwareSerial &sSerial);
+bool hd_bittyControllerEvent(String event);
+bool hd_bittyControllerDpad(String dpad, String button, int pressed);
+
 void hd_InitPlayFrequency();
 void hd_PlayFrequency(float freq, int pin);
 void hd_StopPlayFrequency(int pin);
