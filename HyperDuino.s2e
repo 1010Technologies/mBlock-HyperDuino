@@ -1,6 +1,6 @@
 {	"extensionName": "HyperDuino",
 	"description": "A Block-Based Programming Environment for the HyperDuino",
-	"version": "1.4.8",
+	"version": "1.5.0",
 	"author": "Roger Wagner(hyperduino@1010technologies.com)",
 	"homepage": "http://hyperduino.com/",
 	"sort":0,
@@ -16,7 +16,7 @@
 			{
 				"inc":"#define BOARD {0}\n#include \"HyperDuino.h\"\n",
 				"def":"",
-				"setup":"",
+				"setup":"hd_InitCapsense();\n",
 				"work":"",
 				"loop":""
 			}
@@ -153,7 +153,7 @@
 			"setup":"",
 			"inc":"#include \"HyperDuino.h\"\n",
 			"def":"",
-			"work":"if (MP3_IsAvailable()) {\nMP3_sendCommand(CMD_PLAY_FOLDER_FILE, {1}*256 + {0});\nif ({2}) MP3_sendCommand(CMD_SET_SNGL_CYCL, 0);\n}\n",
+			"work":"MP3_SendCommand(CMD_PLAY_FOLDER_FILE, {1}*256 + {0});\nif ({2}) MP3_SendCommand(CMD_SET_SNGL_CYCL, 0);\n",
 			"loop":""
 		}
 		],
@@ -166,7 +166,7 @@
 			"setup":"",
 			"inc":"#include \"HyperDuino.h\"\n",
 			"def":"",
-			"work":"if (MP3_IsAvailable()) MP3_sendCommand({0}, 0);\n",
+			"work":"MP3_SendCommand({0}, 0);\n",
 			"loop":"" 
 		}
 		],
@@ -179,7 +179,7 @@
 			"setup":"",
 			"inc":"#include \"HyperDuino.h\"\n",
 			"def":"",
-			"work":"if (MP3_IsAvailable()) MP3_sendCommand(CMD_SET_VOLUME, {0});\n",
+			"work":"MP3_SendCommand(CMD_SET_VOLUME, {0});\n",
 			"loop":"" 
 		}
 		],
@@ -191,7 +191,7 @@
 			"setup":"",
 			"inc":"#include \"HyperDuino.h\"\n",
 			"def":"",
-			"work":"(MP3_IsAvailable() && MP3_sendCommand(CMD_QUERY_STATUS, 0) == 1)",
+			"work":"(MP3_IsPlaying())",
 			"loop":""
 		}
 		],

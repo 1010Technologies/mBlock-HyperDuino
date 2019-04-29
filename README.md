@@ -6,7 +6,7 @@ Instructions on creating extensions and adding blocks: http://download.makeblock
 
 To build the extension for use within mBlock:
 
-    zip --exclude \*.git\* -r hyperduino.zip mBlock-HyperDuino
+    zip --exclude \*.git\* \*.vscode\* -r hyperduino.zip mBlock-HyperDuino
 
 To add the new extension to mBlock, visit http://www.mblock.cc/extensions
 

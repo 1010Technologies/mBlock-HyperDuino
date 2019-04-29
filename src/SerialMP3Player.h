@@ -54,6 +54,6 @@
 /************ Options **************************/
 #define DEV_TF            0X02
 
-int MP3_IsAvailable(void);
-int MP3_sendCommand(int8_t command, int16_t dat);
+int MP3_SendCommand(int8_t command, int16_t dat);
+boolean MP3_IsPlaying(void);
 
