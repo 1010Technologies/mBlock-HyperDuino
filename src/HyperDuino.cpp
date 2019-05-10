@@ -153,29 +153,14 @@ bool hd_bittyControllerEvent(String event)
     return bittyMsg[0] == 4;
   if (event == "Sampling Control")
     return bittyMsg[0] == 6;
-  if (event == "Pad")
+  if (event == "Button")
     return bittyMsg[0] == 7;
   if (event == "Pin")
     return bittyMsg[0] == 8;
   return false;
 }
 
-//   01 - left pad, top button - pressed
-//   02 - left pad, top button - released
-//   03 - left pad, bottom button - pressed
-//   04 - left pad, bottom button - released
-//   05 - left pad, left button - pressed
-//   06 - left pad, left button - released
-//   07 - left pad, right button - pressed
-//   08 - left pad, right button - released
-//   09 - right pad, top button - pressed
-//   10 - right pad, top button - released
-//   11 - right pad, bottom button - pressed
-//   12 - right pad, bottom button - released
-//   13 - right pad, left button - pressed
-//   14 - right pad, left button - released
-//   15 - right pad, right button - pressed
-//   16 - right pad, right button - released
+
 bool hd_bittyControllerDpad(String dpad, String button, int pressed)
 {
   if (bittyMsg[0] != 1)
@@ -205,11 +190,52 @@ bool hd_bittyControllerDpad(String dpad, String button, int pressed)
     }
 }
 
+
+int hd_bittyControllerMotionForward()
+{
+  if (bittyMsg[0] != 2)
+    return 0;
+  return (int) bittyMsg[1];
+}
+
+
+int hd_bittyControllerMotionRight()
+{
+  if (bittyMsg[0] != 2)
+    return 0;
+  return (int) bittyMsg[2];
+}
+
+
+bool hd_bittyControllerTouchpad(int touched)
+{
+  if (bittyMsg[0] != 3)
+    return false;
+  return bittyMsg[2] == touched;
+}
+
+
+bool hd_bittyControllerOther(int pressed)
+{
+  if (bittyMsg[0] != 4)
+    return false;
+  return bittyMsg[2] == pressed;
+}
+
+
+int hd_bittyControllerButton()
+{
+  if (bittyMsg[0] != 7)
+    return -1;
+  return (int) bittyMsg[1];
+}
+
+
 void hd_InitPlayFrequency()
-  {
-    // Use Timer0 (millis) for hd_PlayFrequency
-    OCR0A = 0xAF;
-    TIMSK0 |= _BV(OCIE0A);
+{
+  // Use Timer0 (millis) for hd_PlayFrequency
+  OCR0A = 0xAF;
+  TIMSK0 |= _BV(OCIE0A);
   }
 
   void hd_PlayFrequency(float freq, int pin)

@@ -28,6 +28,11 @@ bool hd_bluetoothHasResponse(SoftwareSerial &sSerial);
 bool hd_bittyControllerHasEvent(SoftwareSerial &sSerial);
 bool hd_bittyControllerEvent(String event);
 bool hd_bittyControllerDpad(String dpad, String button, int pressed);
+bool hd_bittyControllerTouchpad(int touched);
+bool hd_bittyControllerOther(int pressed);
+int hd_bittyControllerButton();
+int hd_bittyControllerMotionForward();
+int hd_bittyControllerMotionRight();
 
 void hd_InitPlayFrequency();
 void hd_PlayFrequency(float freq, int pin);

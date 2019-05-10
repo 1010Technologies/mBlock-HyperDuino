@@ -1,6 +1,6 @@
 {	"extensionName": "HyperDuino",
 	"description": "A Block-Based Programming Environment for the HyperDuino",
-	"version": "1.5.1",
+	"version": "1.5.2",
 	"author": "Roger Wagner(hyperduino@1010technologies.com)",
 	"homepage": "http://hyperduino.com/",
 	"sort":0,
@@ -373,6 +373,73 @@
       }
     ],
   
+    [
+      "r",
+      "Bitty touchpad motion forward",
+      "btBittyTouchpadForwardEvent",
+      {
+        "inc": "#include \"HyperDuino.h\"\n",
+        "def": "",
+        "setup": "",
+        "work": "hd_bittyControllerMotionForward()",
+        "loop": ""
+      }
+    ],
+
+    [
+      "r",
+      "Bitty touchpad motion right",
+      "btBittyTouchpadRightEvent",
+      {
+        "inc": "#include \"HyperDuino.h\"\n",
+        "def": "",
+        "setup": "",
+        "work": "hd_bittyControllerMotionRight()",
+        "loop": ""
+      }
+    ],
+
+    [
+      "b",
+      "Bitty touchpad %d.TOUCHPAD_STATE",
+      "btBittyTouchpadEvent",
+      "touched",
+      {
+        "inc": "#include \"HyperDuino.h\"\n",
+        "def": "",
+        "setup": "",
+        "work": "hd_bittyControllerTouchpad({0})",
+        "loop": ""
+      }
+    ],
+
+    [
+      "b",
+      "Bitty other control %d.DPAD_STATE",
+      "btBittyOtherControlEvent",
+      "pressed",
+      {
+        "inc": "#include \"HyperDuino.h\"\n",
+        "def": "",
+        "setup": "",
+        "work": "hd_bittyControllerOther({0})",
+        "loop": ""
+      }
+    ],
+
+    [
+      "r",
+      "Bitty pressed button ID",
+      "btBittyButtonEvent",
+      {
+        "inc": "#include \"HyperDuino.h\"\n",
+        "def": "",
+        "setup": "",
+        "work": "hd_bittyControllerButton()",
+        "loop": ""
+      }
+    ],
+
     ["r",
 			"ArduinoBlue get button",
 			"abGetButton",
@@ -470,10 +537,11 @@
 		"LCDcolumns": ["16", "20"],
 		"BT_TX": ["A0","A1","A2","A3","A4","A5",2,3,4,5,6,7,8,9,10,11,12],
 		"BT_RX": ["A0","A1","A2","A3","A4","A5",2,3,4,5,6,7,8,9,10,11,12],
-    "BITTY_EVENT": ["Dpad","Touchpad motion","Touchpad control","Other control","Sampling Control","Pad", "Pin"],
+    "BITTY_EVENT": ["Dpad","Touchpad motion","Touchpad control","Other control","Sampling Control","Button", "Pin"],
     "DPAD_PAD": ["left", "right"],
     "DPAD_BUTTON": ["top", "bottom", "left", "right"],
-    "DPAD_STATE": ["pressed", "released"]
+    "DPAD_STATE": ["pressed", "released"],
+    "TOUCHPAD_STATE": ["touched", "released"]
 	},
     
   "values":{
@@ -501,6 +569,7 @@
 		"A4": 18,
 		"A5": 19,
     "pressed": 1,
+    "touched": 1,
     "released": 0
   },
 
