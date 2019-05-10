@@ -20,6 +20,10 @@ String hd_softSerialSendReceive(SoftwareSerial &sSerial, char *s);
 void hd_softSerialSend(SoftwareSerial &sSerial, char *s);
 String hd_softSerialReceive(SoftwareSerial &sSerial);
 
+void hd_lcdPrint(LiquidCrystal_I2C lcd, double value);
+void hd_lcdPrint(LiquidCrystal_I2C lcd, const char value[]);
+void hd_lcdPrint(LiquidCrystal_I2C lcd, double value, int decimals);
+
 bool hd_bluetoothHasResponse(SoftwareSerial &sSerial);
 bool hd_bittyControllerHasEvent(SoftwareSerial &sSerial);
 bool hd_bittyControllerEvent(String event);

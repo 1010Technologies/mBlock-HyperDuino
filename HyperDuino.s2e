@@ -1,6 +1,6 @@
 {	"extensionName": "HyperDuino",
 	"description": "A Block-Based Programming Environment for the HyperDuino",
-	"version": "1.5.0",
+	"version": "1.5.1",
 	"author": "Roger Wagner(hyperduino@1010technologies.com)",
 	"homepage": "http://hyperduino.com/",
 	"sort":0,
@@ -224,7 +224,7 @@
 		],
 
     ["w",
-			"LCD set cursor column %d row %d",
+			"LCD set cursor column %n row %n",
 			"lcdSetCursor",
 			"0",
 			"0",
@@ -245,10 +245,25 @@
 				"inc":"#include \"HyperDuino.h\"\n",
 				"def":"",
 				"setup":"",
-				"work":"lcd.print({0});\n",
+				"work":"hd_lcdPrint(lcd, {0});\n",
 				"loop":"" 
 			}
 		],
+
+    [
+      "w",
+      "LCD print %s with %n decimals",
+      "lcdPrintWithDecimals",
+      "3.14",
+      "2",
+      {
+        "inc": "#include \"HyperDuino.h\"\n",
+        "def": "",
+        "setup": "",
+        "work": "hd_lcdPrint(lcd, {0}, {1});\n",
+        "loop": ""
+      }
+    ],
 
     ["w",
 			"Bluetooth setup TX %d.BT_TX RX %d.BT_RX",

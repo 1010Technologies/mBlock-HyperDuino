@@ -51,6 +51,28 @@ int hd_getTouchPin()
   return 0;
 }
 
+void hd_lcdPrint(LiquidCrystal_I2C lcd, double value)
+{
+  if ((long) value == value)
+  {
+    lcd.print((long) value);
+  }
+  else
+  {
+    lcd.print(value);
+  }
+}
+
+void hd_lcdPrint(LiquidCrystal_I2C lcd, const char value[])
+{
+  lcd.print(value);
+}
+
+void hd_lcdPrint(LiquidCrystal_I2C lcd, double value, int decimals)
+{
+  lcd.print(value, decimals);
+}
+
 String bluetoothResponse = "";
 
 void hd_bluetoothCheckResponse(SoftwareSerial &sSerial) 
