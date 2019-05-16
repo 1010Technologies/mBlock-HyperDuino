@@ -63,6 +63,11 @@ void hd_lcdPrint(LiquidCrystal_I2C lcd, double value)
   }
 }
 
+void hd_lcdPrint(LiquidCrystal_I2C lcd, const String value)
+{
+  lcd.print(value);
+}
+
 void hd_lcdPrint(LiquidCrystal_I2C lcd, const char value[])
 {
   lcd.print(value);

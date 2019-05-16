@@ -21,6 +21,7 @@ void hd_softSerialSend(SoftwareSerial &sSerial, char *s);
 String hd_softSerialReceive(SoftwareSerial &sSerial);
 
 void hd_lcdPrint(LiquidCrystal_I2C lcd, double value);
+void hd_lcdPrint(LiquidCrystal_I2C lcd, String value);
 void hd_lcdPrint(LiquidCrystal_I2C lcd, const char value[]);
 void hd_lcdPrint(LiquidCrystal_I2C lcd, double value, int decimals);
 
