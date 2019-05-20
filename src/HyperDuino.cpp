@@ -51,7 +51,12 @@ int hd_getTouchPin()
   return 0;
 }
 
-void hd_lcdPrint(LiquidCrystal_I2C lcd, double value)
+void hd_lcdPrint(LiquidCrystal_I2C lcd, const int value)
+{
+  lcd.print(value);
+}
+
+void hd_lcdPrint(LiquidCrystal_I2C lcd, const double value)
 {
   if ((long) value == value)
   {
@@ -73,7 +78,7 @@ void hd_lcdPrint(LiquidCrystal_I2C lcd, const char value[])
   lcd.print(value);
 }
 
-void hd_lcdPrint(LiquidCrystal_I2C lcd, double value, int decimals)
+void hd_lcdPrint(LiquidCrystal_I2C lcd, const double value, const int decimals)
 {
   lcd.print(value, decimals);
 }
