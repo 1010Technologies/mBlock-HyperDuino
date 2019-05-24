@@ -85,7 +85,7 @@ void hd_lcdPrint(LiquidCrystal_I2C lcd, const double value, const int decimals)
 
 String bluetoothResponse = "";
 
-void hd_bluetoothCheckResponse(SoftwareSerial &sSerial) 
+static void hd_bluetoothCheckResponse(SoftwareSerial &sSerial) 
 {
   delay(30);
   int i = 0;
@@ -105,7 +105,7 @@ bool hd_bluetoothHasResponse(SoftwareSerial &sSerial)
   return (strlen(buf) > 0);
 }
 
-String hd_bluetoothGetResponse()
+static String hd_bluetoothGetResponse()
 {
   if (strlen(buf) > 0)
   {
@@ -133,113 +133,6 @@ String hd_softSerialSendReceive(SoftwareSerial &sSerial, char *s)
   hd_softSerialSend(sSerial, s);
   return hd_softSerialReceive(sSerial);
 }
-
-// Length in bytes of Bitty messages (including the opcode)
-byte bittyLen[9] = {0, 2, 3, 3, 2, 3, 2, 2, 7};
-char bittyMsg[7] = {0};
-
-bool hd_bittyControllerHasEvent(SoftwareSerial &sSerial)
-{
-  hd_bluetoothCheckResponse(sSerial);
-  char c = buf[0];
-  if (c > 0 && c <= 8 && strlen(buf) == bittyLen[c])
-  {
-    memcpy(bittyMsg, buf, bittyLen[c]);
-    buf[0] = '\0';
-    return true;
-  }
-  return false;
-}
-
-bool hd_bittyControllerEvent(String event)
-{
-  if (event == "Dpad")
-    return bittyMsg[0] == 1;
-  if (event == "Touchpad motion")
-    return bittyMsg[0] == 2;
-  if (event == "Touchpad control")
-    return bittyMsg[0] == 3;
-  if (event == "Other control")
-    return bittyMsg[0] == 4;
-  if (event == "Sampling Control")
-    return bittyMsg[0] == 6;
-  if (event == "Button")
-    return bittyMsg[0] == 7;
-  if (event == "Pin")
-    return bittyMsg[0] == 8;
-  return false;
-}
-
-
-bool hd_bittyControllerDpad(String dpad, String button, int pressed)
-{
-  if (bittyMsg[0] != 1)
-    return false;
-  int d = bittyMsg[1];
-  if (d < 1 || d > 16)
-    return false;
-  if (pressed && d % 2 != 1)
-    return false;
-  if (dpad == "left") {
-    if (bittyMsg[1] > 8)
-      return false;
-  } else if (bittyMsg[1] < 9) {
-    return false;
-  }
-  d = ((d - 1) % 8)/2;
-  switch (d)
-  {
-    case 0:
-      return (button == "top");
-    case 1:
-      return (button == "bottom");
-    case 2:
-      return (button == "left");
-    case 3:
-      return (button == "right");
-    }
-}
-
-
-int hd_bittyControllerMotionForward()
-{
-  if (bittyMsg[0] != 2)
-    return 0;
-  return (int) bittyMsg[1];
-}
-
-
-int hd_bittyControllerMotionRight()
-{
-  if (bittyMsg[0] != 2)
-    return 0;
-  return (int) bittyMsg[2];
-}
-
-
-bool hd_bittyControllerTouchpad(int touched)
-{
-  if (bittyMsg[0] != 3)
-    return false;
-  return bittyMsg[2] == touched;
-}
-
-
-bool hd_bittyControllerOther(int pressed)
-{
-  if (bittyMsg[0] != 4)
-    return false;
-  return bittyMsg[2] == pressed;
-}
-
-
-int hd_bittyControllerButton()
-{
-  if (bittyMsg[0] != 7)
-    return -1;
-  return (int) bittyMsg[1];
-}
-
 
 void hd_InitPlayFrequency()
 {
