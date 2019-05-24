@@ -1,6 +1,6 @@
 {	"extensionName": "HyperDuino",
-	"description": "A Block-Based Programming Environment for the HyperDuino",
-	"version": "1.5.5",
+	"description": "mBlocks for the HyperDuino",
+	"version": "1.5.6",
 	"author": "Roger Wagner(hyperduino@1010technologies.com)",
 	"homepage": "http://hyperduino.com/",
 	"sort":0,
@@ -328,92 +328,8 @@
 				"work":"hd_softSerialReceive(bluetooth)",
 				"loop":"" 
 			}
-		],
-
-    ["r",
-			"ArduinoBlue get button",
-			"abGetButton",
-			{
-				"inc":"#include \"ArduinoBlue_hf.h\"\n",
-				"def":"ArduinoBlue phone(bluetooth);\n",
-				"setup":"",
-				"work":"phone.getButton()",
-				"loop":"" 
-			}
-		],
-
-    ["r",
-			"ArduinoBlue get throttle",
-			"abGetThrottle",
-			{
-				"inc":"#include \"ArduinoBlue_hf.h\"\n",
-				"def":"ArduinoBlue phone(bluetooth);\n",
-				"setup":"",
-				"work":"phone.getThrottle()",
-				"loop":"" 
-			}
-		],
-
-    ["r",
-			"ArduinoBlue get steering",
-			"abGetSteering",
-			{
-				"inc":"#include \"ArduinoBlue_hf.h\"\n",
-				"def":"ArduinoBlue phone(bluetooth);\n",
-				"setup":"",
-				"work":"phone.getSteering()",
-				"loop":"" 
-			}
-		],
-
-    ["r",
-			"ArduinoBlue get slider ID",
-			"abGetSliderID",
-			{
-				"inc":"#include \"ArduinoBlue_hf.h\"\n",
-				"def":"ArduinoBlue phone(bluetooth);\n",
-				"setup":"",
-				"work":"phone.getSliderId()",
-				"loop":"" 
-			}
-		],
-
-    ["r",
-			"ArduinoBlue get slider value",
-			"abGetSliderValue",
-			{
-				"inc":"#include \"ArduinoBlue_hf.h\"\n",
-				"def":"ArduinoBlue phone(bluetooth);\n",
-				"setup":"",
-				"work":"phone.getSliderVal()",
-				"loop":"" 
-			}
-		],
-
-    ["r",
-			"ArduinoBlue get text",
-			"abGetText",
-			{
-				"inc":"#include \"ArduinoBlue_hf.h\"\n",
-				"def":"ArduinoBlue phone(bluetooth);\n",
-				"setup":"",
-				"work":"phone.getText()",
-				"loop":"" 
-			}
-		],
-
-    ["w",
-			"ArduinoBlue send text %s",
-			"abSendText",
-			"hello",
-			{
-				"inc":"#include \"ArduinoBlue_hf.h\"\n",
-				"def":"ArduinoBlue phone(bluetooth);\n",
-				"setup":"",
-				"work":"phone.sendText({0});\n",
-				"loop":"" 
-			}
 		]
+
 	],
 
   "menus": {
