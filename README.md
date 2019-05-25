@@ -15,6 +15,10 @@ The current version runs only in Arduino mode. In other words, you need to click
 
 Instructions on creating extensions and adding blocks: http://download.makeblock.com/mblock/mblock_extension_guide.pdf
 
+    rm *.zip
     zip --exclude \*.git\* \*.vscode\* -r hyperduino.zip mBlock-HyperDuino
+    zip --exclude \*.git\* \*.vscode\* -r arduinoblue.zip mBlock-ArduinoBlue
+    zip --exclude \*.git\* \*.vscode\* -r bitty.zip mBlock-BittyController
+    cd mBlock-IRRemote ; zip -r ../irremote.zip mblock_ext ; cd ..
 
 To add the new extension to mBlock, visit http://www.mblock.cc/extensions
